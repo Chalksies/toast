@@ -12,14 +12,15 @@
 ---
 ## Instructions:
 
-Clone the repository and run following command. Preferably in a venv.
-`pip install -r requirements.txt`
+- Clone the repository and run following command (preferably in a venv):`pip install -r requirements.txt`
 
-Put your user ID (to send the initial bot message via /say) and your Discord app token in a `.env` file in the following format
+- Put your user ID (to send the initial bot message via /say) and your Discord app token in a `.env` file in the following format
+```
 DISCORD_TOKEN="123456789abcdefg"
 MOD="123456789"
+```
 
-Run `bot.py` and send a message with the /say command. 
+- Run `bot.py` and send a message with the /say command. 
 
 ---
 
