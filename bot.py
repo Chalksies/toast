@@ -20,7 +20,8 @@ tree = app_commands.CommandTree(bot)
 async def say(interaction: discord.Interaction, message: str):
 
     if interaction.user.id == mod_id:
-        await interaction.response.send_message(message)
+        await interaction.response.send_message("Message sent :3", ephemeral=True)
+        await interaction.channel.send(message)
     else:
         await interaction.response.send_message("Can't talk as me!", ephemeral=True)
 
@@ -42,7 +43,7 @@ async def on_message(message):
 
             if original_message.author == bot.user:
                 if "tenor.com/view" in message.content:
-                    print("Tenor link detected. Further validating URL.")
+                    print("Tenor link detected! Further validating URL...")
                     await download_and_send_gif(message, message.content)
                     
         except discord.NotFound:
@@ -53,10 +54,10 @@ async def on_message(message):
 async def download_and_send_gif(ctx_message, text):
     url_match = re.search(r"(https?://tenor\.com/view/[a-zA-Z0-9-]+)", text)
     if not url_match:
-        print("No regex match. Skipping.")
+        print("No regex match... Skipping this message!")
         return
     
-    print("Regex matched. Proceeding.")
+    print("Regex matched! Proceeding :fluffycar:")
     url = url_match.group(1)
     
     try:
@@ -65,26 +66,28 @@ async def download_and_send_gif(ctx_message, text):
         response.raise_for_status()
         
         soup = BeautifulSoup(response.text, 'html.parser')
-        print("Parsing webpage.")
+        print("Parsing webpage!")
         meta_tag = soup.find("meta", property="og:image")
         
         if not meta_tag:
-            await ctx_message.reply("Could not extract GIF data.")
+            await ctx_message.reply("Could not extract GIF data...")
             return
             
         gif_url = meta_tag["content"]
         
         gif_data = requests.get(gif_url)
         gif_data.raise_for_status()
-        
+
         file_obj = io.BytesIO(gif_data.content)
         file_obj.seek(0)
-        
+
         filename = f"archived_{url.split('/')[-1]}.gif"
-        print("Sending gif.")
+        print("Sending gif!")
         await ctx_message.reply(file=discord.File(fp=file_obj, filename=filename))
 
     except Exception as e:
-        await ctx_message.reply(f"Failed to download: {e}")
+        await ctx_message.reply(f"Failed to download or send the gif: {e}")
+
+
 
 bot.run(token)

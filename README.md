@@ -1,7 +1,7 @@
 *Disclaimer: This tool is for personal archival only. It is not intended to spam or burden Tenor servers.*
 
 ---
-# Toast: Discord bot for auto-uploading Tenor gifs to Discord CDN to save favorited gifs.
+# Toast: Discord bot for auto-uploading Tenor gifs to Discord CDN to save gifs before the Tenor API is killed.
 
 
 ## Requirements:
