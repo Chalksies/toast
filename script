@@ -1,0 +1,16 @@
+(() => {
+    const FrecencyUserSettings = Vencord.Webpack.find(m => m.ProtoClass?.typeName?.endsWith(".FrecencyUserSettings"));
+    if (!FrecencyUserSettings) return console.error("Module not found.");
+
+    const favoriteGifs = Object.keys(FrecencyUserSettings.getCurrentValue().favoriteGifs.gifs);
+
+    const blob = new Blob([JSON.stringify(favoriteGifs, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const tempLink = document.createElement("a");
+    tempLink.href = url;
+    tempLink.download = "favorite_gifs_list.json";
+    document.body.appendChild(tempLink);
+    tempLink.click();
+    document.body.removeChild(tempLink);
+    URL.revokeObjectURL(url);
+})();

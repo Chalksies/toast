@@ -1,3 +1,5 @@
+import random
+
 import discord
 from discord.ext import commands
 from discord import app_commands
@@ -8,6 +10,7 @@ import os
 import re
 from dotenv import load_dotenv
 import json
+import asyncio
 
 load_dotenv()
 token = os.getenv("DISCORD_TOKEN")
@@ -25,6 +28,15 @@ async def say(interaction: discord.Interaction, message: str):
         await interaction.channel.send(message)
     else:
         await interaction.response.send_message("Can't talk as me!", ephemeral=True)
+
+@tree.command(name="help")
+async def help_command(interaction: discord.Interaction):
+    await interaction.response.send_message(f"**Available Commands:**\n"
+                                            f"- `/help` - Show this help message\n"
+                                            f"- `/download_from_json` - Download GIFs from a JSON file\n\n"
+                                            f"You can save Tenor gifs by replying to *any* message from Toast.\n\n"
+                                            f"To get a JSON file to use with the /download_from_json command, you can use the script in following link with the **Vencord** developer console: https://raw.githubusercontent.com/ToastBot/ToastBot/main/script)\n"
+                                            f"You can then directly attach the file when using the command. Toast will automatically download and send the gifs on the list (if it's on Tenor) to the channel it was ran in.")
 
 @tree.command(name="download_from_json")
 async def download_from_json(interaction: discord.Interaction, file: discord.Attachment):
@@ -126,6 +138,8 @@ async def download_and_send_auto(interaction, link):
     if not url_match:
         print("No regex match... Skipping this link!")
         return
+    
+    await asyncio.sleep(random.uniform(0.5, 1.5)) 
     
     try:
         headers = {'User-Agent': 'Mozilla/5.0'} 
