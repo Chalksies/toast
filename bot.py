@@ -35,7 +35,7 @@ async def help_command(interaction: discord.Interaction):
                                             f"- `/help` - Show this help message\n"
                                             f"- `/download_from_json` - Download GIFs from a JSON file\n\n"
                                             f"You can save Tenor gifs by replying to *any* message from Toast.\n\n"
-                                            f"To get a JSON file to use with the /download_from_json command, you can use the script in following link with the **Vencord** developer console: https://raw.githubusercontent.com/ToastBot/ToastBot/main/script)\n"
+                                            f"To get a JSON file to use with the /download_from_json command, you can use the script in following link with the **Vencord** developer console: https://raw.githubusercontent.com/Chalksies/toast/refs/heads/main/script)\n"
                                             f"You can then directly attach the file when using the command. Toast will automatically download and send the gifs on the list (if it's on Tenor) to the channel it was ran in.")
 
 @tree.command(name="download_from_json")
